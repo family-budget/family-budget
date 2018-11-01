@@ -4,7 +4,8 @@ package edu.byui.team11.familybudget;
 // This is for Teach 07 - Luis
 // This is for Teach 07 - Elias
 
-//test comment
+// This should conflict
+
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
