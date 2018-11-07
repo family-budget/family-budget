@@ -2,6 +2,11 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 28
+
+    packagingOptions {
+        exclude 'META-INF/proguard/androidx-annotations.pro'
+    }
+
     defaultConfig {
         applicationId "edu.byui.team11.familybudget"
         minSdkVersion 19
