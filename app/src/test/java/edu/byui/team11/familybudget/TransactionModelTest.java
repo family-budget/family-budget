@@ -2,6 +2,8 @@ package edu.byui.team11.familybudget;
 
 import org.junit.Test;
 
+import edu.byui.team11.familybudget.model.Transaction;
+
 import static org.junit.Assert.*;
 
 public class TransactionModelTest {
