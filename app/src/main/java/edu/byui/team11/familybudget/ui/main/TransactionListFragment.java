@@ -7,6 +7,8 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,12 +23,20 @@ public class MainFragment extends Fragment {
         return new MainFragment();
     }
 
-    private void configureFloatingAddTransactionButton(FloatingActionButton fab) {
-        fab.setOnClickListener(new View.OnClickListener() {
+    private void configureFloatingAddTransactionButton(FloatingActionButton bt) {
+        bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                fragmentTransaction.replace(R.id.container, new TransactionFormFragment());
+                fragmentTransaction.commit();
+
+                /*
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                        */
             }
         });
     }
