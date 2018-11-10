@@ -6,8 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,25 +13,30 @@ import android.view.ViewGroup;
 import edu.byui.team11.familybudget.R;
 
 public class TransactionListFragment extends Fragment {
-
     private MainViewModel mViewModel;
 
     public static TransactionListFragment newInstance() {
         return new TransactionListFragment();
     }
 
-    private void configureFloatingAddTransactionButton(FloatingActionButton bt) {
+    private void configureAddTransactionButton(FloatingActionButton bt) {
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getFragmentManager().beginTransaction()
                         .replace(R.id.container, new TransactionFormFragment())
                         .commit();
+            }
+        });
+    }
 
-                /*
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                        */
+    private void configureChangeBudgetButton(FloatingActionButton bt) {
+        bt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.container, new BudgetFormFragment())
+                        .commit();
             }
         });
     }
@@ -50,8 +53,8 @@ public class TransactionListFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        FloatingActionButton addTransactionButton = (FloatingActionButton) getView().findViewById(R.id.add_transaction);
-        configureFloatingAddTransactionButton(addTransactionButton);
+        configureAddTransactionButton((FloatingActionButton) getView().findViewById(R.id.add_transaction));
+        configureChangeBudgetButton((FloatingActionButton) getView().findViewById(R.id.configure_budget));
 
         mViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
         // TODO: Use the ViewModel
