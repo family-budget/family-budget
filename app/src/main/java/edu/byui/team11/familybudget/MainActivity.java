@@ -3,7 +3,7 @@ package edu.byui.team11.familybudget;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import edu.byui.team11.familybudget.ui.main.TransactionListFragment;
+import edu.byui.team11.familybudget.fragments.TransactionListFragment;
 
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -14,6 +14,8 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState != null) {
             return;
         }
+
+        //TODO: If there is no budget configured, show the BudgetFormFragment instead of TransactionListFragment
 
         // Start the activity with the TransactionListFragment
         getSupportFragmentManager().beginTransaction()

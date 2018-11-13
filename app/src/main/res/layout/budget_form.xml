@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="Income"
-        app:layout_constraintBaseline_toBaselineOf="@+id/editText"
+        app:layout_constraintBaseline_toBaselineOf="@+id/incomeInput"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="Utilities"
-        app:layout_constraintBaseline_toBaselineOf="@+id/editText3"
+        app:layout_constraintBaseline_toBaselineOf="@+id/utilitiesInput"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -54,7 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="Tithing"
-        app:layout_constraintBaseline_toBaselineOf="@+id/editText2"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tithingInput"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -63,7 +63,7 @@
         android:layout_height="19dp"
         android:layout_marginStart="8dp"
         android:text="Rent / Mortgage"
-        app:layout_constraintBaseline_toBaselineOf="@+id/editText4"
+        app:layout_constraintBaseline_toBaselineOf="@+id/rentInput"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -72,11 +72,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="Food"
-        app:layout_constraintBaseline_toBaselineOf="@+id/editText5"
+        app:layout_constraintBaseline_toBaselineOf="@+id/foodInput"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/incomeInput"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -88,7 +88,7 @@
         tools:layout_editor_absoluteY="51dp" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/tithingInput"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -98,10 +98,10 @@
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/incomeInput" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/utilitiesInput"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -111,10 +111,10 @@
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/editText2" />
+        app:layout_constraintTop_toBottomOf="@+id/tithingInput" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/rentInput"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -124,10 +124,10 @@
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView6"
-        app:layout_constraintTop_toBottomOf="@+id/editText3" />
+        app:layout_constraintTop_toBottomOf="@+id/utilitiesInput" />
 
     <EditText
-        android:id="@+id/editText5"
+        android:id="@+id/foodInput"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -137,6 +137,6 @@
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView7"
-        app:layout_constraintTop_toBottomOf="@+id/editText4" />
+        app:layout_constraintTop_toBottomOf="@+id/rentInput" />
 
 </android.support.constraint.ConstraintLayout>

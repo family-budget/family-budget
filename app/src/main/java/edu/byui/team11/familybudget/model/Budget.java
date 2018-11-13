@@ -10,5 +10,8 @@ public class Budget {
     public int id;
 
     @ColumnInfo
-    public int amount;
+    public String category;
+
+    @ColumnInfo
+    public float amount;
 }

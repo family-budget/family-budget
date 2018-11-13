@@ -1,6 +1,5 @@
-package edu.byui.team11.familybudget.ui.main;
+package edu.byui.team11.familybudget.fragments;
 
-import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;

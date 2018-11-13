@@ -1,4 +1,4 @@
-package edu.byui.team11.familybudget.ui.main;
+package edu.byui.team11.familybudget.fragments;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
