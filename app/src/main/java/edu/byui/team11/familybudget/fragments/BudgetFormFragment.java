@@ -36,7 +36,7 @@ public class BudgetFormFragment extends Fragment {
         //loadBudgetFromTheDatabase();
         displayBudgetOnForm();
 
-        configureSubmitButton((FloatingActionButton) getView().findViewById(R.id.submit_budget_form));
+        configureSubmitButton((FloatingActionButton) getView().findViewById(R.id.submit_budget_button));
     }
 
     private void displayBudgetOnForm() {
