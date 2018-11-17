@@ -1,10 +1,18 @@
 package edu.byui.team11.familybudget.model;
 
-public class Transaction {
-    public void setAmount(double v) {
-    }
 
-    public double getAmount() {
-        return 12.65;
-    }
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+
+@Entity
+public class Transaction {
+    @PrimaryKey
+    public int id;
+
+    @ColumnInfo
+    public String category;
+
+    @ColumnInfo
+    public float amount;
 }
