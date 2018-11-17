@@ -6,8 +6,9 @@ import android.arch.persistence.room.RoomDatabase;
 import edu.byui.team11.familybudget.dao.BudgetDAO;
 import edu.byui.team11.familybudget.dao.TransactionDAO;
 import edu.byui.team11.familybudget.model.Budget;
+import edu.byui.team11.familybudget.model.Transaction;
 
-@Database(entities = {Budget.class}, version = 1, exportSchema = false)
+@Database(entities = {Budget.class, Transaction.class}, version = 1, exportSchema = false)
 public abstract class ApplicationDatabase extends RoomDatabase {
         public abstract BudgetDAO budgetDAO();
         public abstract TransactionDAO transactionDAO();

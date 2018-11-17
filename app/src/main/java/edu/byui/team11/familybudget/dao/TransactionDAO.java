@@ -22,6 +22,6 @@ public interface TransactionDAO {
     @Delete
     void delete(Transaction... transactions);
 
-    @Query("SELECT * FROM transaction")
+    @Query("SELECT * FROM `Transaction`")
     List<Transaction> findAll();
 }
