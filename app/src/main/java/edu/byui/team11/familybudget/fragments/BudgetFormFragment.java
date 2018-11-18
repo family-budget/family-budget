@@ -44,27 +44,32 @@ public class BudgetFormFragment extends Fragment {
         // Use this.ourBudgetsDatabase to load.
     }
 
+    public void onClickSubmitButton() {
+        View formView = getView();
+        saveBudget(formView);
+        showSuccessMessage(formView);
+        goToTransactionList();
+    }
 
     private void configureSubmitButton(FloatingActionButton bt) {
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                saveBudget(view);
-                showSuccessMessage(view);
-                goToTransactionList();
+            public void onClick(View button) {
+                onClickSubmitButton();
             }
         });
     }
 
-    private void saveBudget(View view) {
+    private void saveBudget(View formView) {
         // Get input fields from the view
-        EditText incomeInput = view.findViewById(R.id.incomeInput);
-        EditText tithingInput = view.findViewById(R.id.tithingInput);
-        EditText utilitiesInput = view.findViewById(R.id.utilitiesInput);
-        EditText rentInput = view.findViewById(R.id.rentInput);
-        EditText foodInput = view.findViewById(R.id.foodInput);
+        EditText incomeInput = formView.findViewById(R.id.incomeInput);
+        EditText tithingInput = formView.findViewById(R.id.tithingInput);
+        EditText utilitiesInput = formView.findViewById(R.id.utilitiesInput);
+        EditText rentInput = formView.findViewById(R.id.rentInput);
+        EditText foodInput = formView.findViewById(R.id.foodInput);
 
         //TODO: Put in the database instead of a List
+        //TODO: validate
 
         // Create budget objects and add them to the "list"
         Budget incomeBudget = new Budget();
