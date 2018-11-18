@@ -8,7 +8,7 @@ import android.widget.EditText;
 
 @Entity
 public class Transaction {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     public int id;
 
     @ColumnInfo

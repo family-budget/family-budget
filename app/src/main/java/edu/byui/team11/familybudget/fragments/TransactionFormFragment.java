@@ -10,18 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.Switch;
-
 
 import edu.byui.team11.familybudget.MainActivity;
 import edu.byui.team11.familybudget.R;
-import edu.byui.team11.familybudget.dao.BudgetDAO;
-import edu.byui.team11.familybudget.dao.TransactionDAO;
+import edu.byui.team11.familybudget.async.CreateTransactionTask;
 import edu.byui.team11.familybudget.model.Transaction;
 
 public class TransactionFormFragment extends Fragment {
-
-
 
     @Nullable
     @Override
@@ -32,10 +27,6 @@ public class TransactionFormFragment extends Fragment {
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        //This is how one gets the database
-        //MainActivity.getDatabase()
-
-
         super.onActivityCreated(savedInstanceState);
         configureSubmitButton((FloatingActionButton) getView().findViewById(R.id.submit_transaction_form));
     }
@@ -45,15 +36,10 @@ public class TransactionFormFragment extends Fragment {
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: Save the values to the database
-
+                saveTransactions(getView());
                 getFragmentManager().beginTransaction()
                         .replace(R.id.container, TransactionListFragment.newInstance())
                         .commit();
-
-                Snackbar.make(view, "Transaction saved", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-
             }
         });
     }
@@ -66,18 +52,10 @@ public class TransactionFormFragment extends Fragment {
         EditText amountInput = view.findViewById(R.id.amountInput);
         //Switch IncomeExpense = view.findViewById(R.id.IncomeExpense);
 
-        MainActivity.getDatabase().transactionDAO().create(transaction);
-
         transaction.category = categoryInput.getText().toString();
         transaction.amount = Float.parseFloat(amountInput.getText().toString());
 
-
-
+        CreateTransactionTask task = new CreateTransactionTask(TransactionListFragment.newInstance().getView());
+        task.execute(transaction);
     }
-
-    private void showSuccessMessage(View view) {
-        Snackbar.make(view, "Transaction saved", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show();
-    }
-
 }
