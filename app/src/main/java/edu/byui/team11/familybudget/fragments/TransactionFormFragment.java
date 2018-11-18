@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import edu.byui.team11.familybudget.R;
 
 public class TransactionFormFragment extends Fragment {
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -22,6 +23,9 @@ public class TransactionFormFragment extends Fragment {
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        //This is how one gets the database
+        //MainActivity.getDatabase();
+
         super.onActivityCreated(savedInstanceState);
         configureSubmitButton((FloatingActionButton) getView().findViewById(R.id.submit_transaction_form));
     }
@@ -39,7 +43,6 @@ public class TransactionFormFragment extends Fragment {
 
                 Snackbar.make(view, "Transaction saved", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-
             }
         });
     }
