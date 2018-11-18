@@ -10,15 +10,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Switch;
 
 
-
+import edu.byui.team11.familybudget.MainActivity;
 import edu.byui.team11.familybudget.R;
+import edu.byui.team11.familybudget.dao.BudgetDAO;
 import edu.byui.team11.familybudget.dao.TransactionDAO;
+import edu.byui.team11.familybudget.model.Transaction;
 
 public class TransactionFormFragment extends Fragment {
 
-    public TransactionDAO transactionsDAO;
+
 
     @Nullable
     @Override
@@ -30,7 +33,8 @@ public class TransactionFormFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         //This is how one gets the database
-        //MainActivity.getDatabase();
+        //MainActivity.getDatabase()
+
 
         super.onActivityCreated(savedInstanceState);
         configureSubmitButton((FloatingActionButton) getView().findViewById(R.id.submit_transaction_form));
@@ -56,16 +60,18 @@ public class TransactionFormFragment extends Fragment {
 
     private void saveTransactions(View view) {
         // Get input fields from the view
+        Transaction transaction = new Transaction();
+
         EditText categoryInput = view.findViewById(R.id.categoryInput);
         EditText amountInput = view.findViewById(R.id.amountInput);
-        EditText IncomeExpense = view.findViewById(R.id.IncomeExpense);
+        //Switch IncomeExpense = view.findViewById(R.id.IncomeExpense);
 
-        this.transactionsDAO.create();
+        MainActivity.getDatabase().transactionDAO().create(transaction);
 
-        transactionsDAO.category = categoryInput;
-        transactionsDAO.amount = Float.parseFloat(amountInput.getText().toString());
+        transaction.category = categoryInput.getText().toString();
+        transaction.amount = Float.parseFloat(amountInput.getText().toString());
 
-        this.transactionsDAO.update();
+
 
     }
 

@@ -12,12 +12,12 @@ public class Transaction {
     public int id;
 
     @ColumnInfo
-    public EditText category;
+    public String category;
 
     @ColumnInfo
     public float amount;
 
-    @ColumnInfo
-    public boolean incomeExpense;
+   // @ColumnInfo
+   // public boolean incomeExpense;
 
 }
