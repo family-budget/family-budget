@@ -29,6 +29,9 @@ public class TransactionFormFragment extends Fragment {
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        //This is how one gets the database
+        //MainActivity.getDatabase();
+
         super.onActivityCreated(savedInstanceState);
         configureSubmitButton((FloatingActionButton) getView().findViewById(R.id.submit_transaction_form));
     }
