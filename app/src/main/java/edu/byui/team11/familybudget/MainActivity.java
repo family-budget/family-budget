@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Here we have an instance of the database
         MainActivity.db = Room.databaseBuilder(getApplicationContext(),
-                ApplicationDatabase.class, "database-name").build();
+                ApplicationDatabase.class, "new-database").build();
 
         if (savedInstanceState != null) {
             return;
