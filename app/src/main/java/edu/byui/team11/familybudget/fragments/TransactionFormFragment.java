@@ -9,10 +9,17 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+
+
 
 import edu.byui.team11.familybudget.R;
+import edu.byui.team11.familybudget.dao.TransactionDAO;
 
 public class TransactionFormFragment extends Fragment {
+
+    public TransactionDAO transactionsDAO;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -42,6 +49,26 @@ public class TransactionFormFragment extends Fragment {
 
             }
         });
+    }
+
+    private void saveTransactions(View view) {
+        // Get input fields from the view
+        EditText categoryInput = view.findViewById(R.id.categoryInput);
+        EditText amountInput = view.findViewById(R.id.amountInput);
+        EditText IncomeExpense = view.findViewById(R.id.IncomeExpense);
+
+        this.transactionsDAO.create();
+
+        transactionsDAO.category = categoryInput;
+        transactionsDAO.amount = Float.parseFloat(amountInput.getText().toString());
+
+        this.transactionsDAO.update();
+
+    }
+
+    private void showSuccessMessage(View view) {
+        Snackbar.make(view, "Transaction saved", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();
     }
 
 }
