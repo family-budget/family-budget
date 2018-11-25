@@ -1,5 +1,6 @@
 package edu.byui.team11.familybudget.dao;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
@@ -14,7 +15,7 @@ import edu.byui.team11.familybudget.model.Transaction;
 public interface TransactionDAO {
 
     @Insert
-    void create(Transaction... transactions);
+    void insert(Transaction... transactions);
 
     @Update
     void update(Transaction... transactions);
@@ -24,4 +25,8 @@ public interface TransactionDAO {
 
     @Query("SELECT * FROM transactions")
     List<Transaction> findAll();
+
+    @Query("SELECT * from transactions ORDER BY budgetedAt ASC")
+    LiveData<List<Transaction>> getAllTransactions();
+
 }

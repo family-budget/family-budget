@@ -47,7 +47,7 @@ public class TransactionDAOTest {
         transaction.amount = 10;
 
         // Add it to the database (this is what we are testing)
-        this.transactionsDao.create(transaction);
+        this.transactionsDao.insert(transaction);
 
         // Assert we can retrieve it from the database
         List<Transaction> created = this.transactionsDao.findAll();

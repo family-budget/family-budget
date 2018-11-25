@@ -1,19 +1,30 @@
 package edu.byui.team11.familybudget.fragments;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
 import edu.byui.team11.familybudget.R;
+import edu.byui.team11.familybudget.adapters.TransactionListAdapter;
+import edu.byui.team11.familybudget.model.Transaction;
+import edu.byui.team11.familybudget.viewmodel.TransactionViewModel;
+
+import static java.util.Objects.requireNonNull;
 
 public class TransactionListFragment extends Fragment {
-    private MainViewModel mViewModel;
+    private TransactionListAdapter adapter;
 
     public static TransactionListFragment newInstance() {
         return new TransactionListFragment();
@@ -41,7 +52,6 @@ public class TransactionListFragment extends Fragment {
         });
     }
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -56,8 +66,27 @@ public class TransactionListFragment extends Fragment {
         configureAddTransactionButton((FloatingActionButton) getView().findViewById(R.id.add_transaction));
         configureChangeBudgetButton((FloatingActionButton) getView().findViewById(R.id.configure_budget));
 
-        mViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
-        // TODO: Use the ViewModel
+        FragmentActivity activity = requireNonNull(getActivity());
+        this.adapter = new TransactionListAdapter(activity);
+        configureTransactionList(activity);
+        updateAdapterWhenTransactionsChange(activity);
     }
 
+    private void configureTransactionList(FragmentActivity activity) {
+        RecyclerView transactionsList = getView().findViewById(R.id.transactionsList);
+        //transactionsList.setHasFixedSize(true);
+        transactionsList.setLayoutManager(new LinearLayoutManager(activity));
+        transactionsList.setAdapter(this.adapter);
+    }
+
+    private void updateAdapterWhenTransactionsChange(FragmentActivity activity) {
+        // Get a new or existing ViewModel from the ViewModelProvider.
+        TransactionViewModel transactionViewModel = ViewModelProviders.of(activity).get(TransactionViewModel.class);
+        transactionViewModel.getAllTransactions().observe(this, new Observer<List<Transaction>>() {
+            @Override
+            public void onChanged(@Nullable List<Transaction> transactions) {
+                adapter.setTransactions(transactions);
+            }
+        });
+    }
 }

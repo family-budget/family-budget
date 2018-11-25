@@ -1,22 +1,34 @@
 package edu.byui.team11.familybudget.fragments;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
-import edu.byui.team11.familybudget.MainActivity;
+import java.util.Calendar;
+import java.util.Objects;
+
 import edu.byui.team11.familybudget.R;
-import edu.byui.team11.familybudget.async.CreateTransactionTask;
 import edu.byui.team11.familybudget.model.Transaction;
+import edu.byui.team11.familybudget.viewmodel.TransactionViewModel;
 
 public class TransactionFormFragment extends Fragment {
+
+    private TransactionViewModel viewModel;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        this.viewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity()))
+                .get(TransactionViewModel.class);
+    }
 
     @Nullable
     @Override
@@ -58,7 +70,6 @@ public class TransactionFormFragment extends Fragment {
         //TODO: configurable by the user
         transaction.budgetedAt = Calendar.getInstance().getTime();
 
-        CreateTransactionTask task = new CreateTransactionTask(TransactionListFragment.newInstance().getView());
-        task.execute(transaction);
+        this.viewModel.insert(transaction);
     }
 }
