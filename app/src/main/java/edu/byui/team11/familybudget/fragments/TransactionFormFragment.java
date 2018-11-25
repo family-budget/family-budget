@@ -55,6 +55,9 @@ public class TransactionFormFragment extends Fragment {
         transaction.category = categoryInput.getText().toString();
         transaction.amount = Float.parseFloat(amountInput.getText().toString());
 
+        //TODO: configurable by the user
+        transaction.budgetedAt = Calendar.getInstance().getTime();
+
         CreateTransactionTask task = new CreateTransactionTask(TransactionListFragment.newInstance().getView());
         task.execute(transaction);
     }
