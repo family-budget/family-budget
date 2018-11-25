@@ -22,6 +22,6 @@ public interface BudgetDAO {
     @Delete
     public void delete(Budget... budgets);
 
-    @Query("SELECT * FROM budget")
+    @Query("SELECT * FROM budgets")
     public List<Budget> findAll();
 }

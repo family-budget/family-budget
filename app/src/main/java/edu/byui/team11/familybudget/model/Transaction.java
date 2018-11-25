@@ -6,7 +6,7 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.widget.EditText;
 
-@Entity
+@Entity(tableName = "transactions")
 public class Transaction {
     @PrimaryKey(autoGenerate = true)
     public int id;
