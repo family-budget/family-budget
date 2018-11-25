@@ -1,6 +1,7 @@
 package edu.byui.team11.familybudget;
 
 import android.arch.persistence.room.Room;
+import android.arch.persistence.room.RoomDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -14,14 +15,17 @@ public class MainActivity extends AppCompatActivity {
         return MainActivity.db;
     }
 
+    private void createDatabase() {
+        RoomDatabase.Builder<ApplicationDatabase> builder = Room.databaseBuilder(getApplicationContext(), ApplicationDatabase.class, "family-budget");
+        MainActivity.db = builder.fallbackToDestructiveMigration().build();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
 
-        // Here we have an instance of the database
-        MainActivity.db = Room.databaseBuilder(getApplicationContext(),
-                ApplicationDatabase.class, "new-database").build();
+        createDatabase();
 
         if (savedInstanceState != null) {
             return;
@@ -34,4 +38,5 @@ public class MainActivity extends AppCompatActivity {
                 .replace(R.id.container, TransactionListFragment.newInstance())
                 .commitNow();
     }
+
 }
