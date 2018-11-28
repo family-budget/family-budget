@@ -4,6 +4,11 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
+
+/**
+ Budget represents the budgeted amount for each category.
+ **/
+
 @Entity(tableName = "budgets")
 public class Budget {
     @PrimaryKey

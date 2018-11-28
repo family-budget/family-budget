@@ -11,6 +11,9 @@ import java.util.List;
 
 import edu.byui.team11.familybudget.model.Transaction;
 
+
+/** This contains the Transaction DAO interface and its methods **/
+
 @Dao
 public interface TransactionDAO {
 

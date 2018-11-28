@@ -20,6 +20,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 
+/** This is the function to test our TransactionDAO **/
+
 @RunWith(AndroidJUnit4.class)
 public class TransactionDAOTest {
     private ApplicationDatabase db;
