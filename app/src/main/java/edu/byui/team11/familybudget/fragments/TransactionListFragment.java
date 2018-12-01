@@ -24,6 +24,7 @@ import edu.byui.team11.familybudget.viewmodel.TransactionViewModel;
 import static java.util.Objects.requireNonNull;
 
 public class TransactionListFragment extends Fragment {
+    private static final String APP_BACKSTACK = "app-back-stack";
     private TransactionListAdapter adapter;
 
     public static TransactionListFragment newInstance() {
@@ -36,6 +37,7 @@ public class TransactionListFragment extends Fragment {
             public void onClick(View view) {
                 getFragmentManager().beginTransaction()
                         .replace(R.id.container, new TransactionFormFragment())
+                        .addToBackStack(APP_BACKSTACK)
                         .commit();
             }
         });
@@ -47,6 +49,7 @@ public class TransactionListFragment extends Fragment {
             public void onClick(View view) {
                 getFragmentManager().beginTransaction()
                         .replace(R.id.container, new BudgetFormFragment())
+                        .addToBackStack(APP_BACKSTACK)
                         .commit();
             }
         });
