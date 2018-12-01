@@ -138,9 +138,8 @@ public class TransactionFormFragment extends Fragment {
         // Get input fields from the view
         Transaction transaction = new Transaction();
 
-        EditText categoryInput = view.findViewById(R.id.categoryInput);
+        EditText categoryInput = view.findViewById(R.id.spinnerCategory);
         EditText amountInput = view.findViewById(R.id.amountInput);
-        //Switch IncomeExpense = view.findViewById(R.id.IncomeExpense);
 
         transaction.category = categoryInput.getText().toString();
         transaction.amount = Float.parseFloat(amountInput.getText().toString());

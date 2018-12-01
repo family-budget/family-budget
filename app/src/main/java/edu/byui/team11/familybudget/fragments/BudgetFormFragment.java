@@ -71,6 +71,7 @@ public class BudgetFormFragment extends Fragment {
         EditText utilitiesInput = formView.findViewById(R.id.utilitiesInput);
         EditText rentInput = formView.findViewById(R.id.rentInput);
         EditText foodInput = formView.findViewById(R.id.foodInput);
+        EditText otherInput = formView.findViewById(R.id.otherInput);
 
         //TODO: Put in the database instead of a List
         //TODO: validate

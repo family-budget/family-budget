@@ -26,18 +26,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="77dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="73dp"
         android:text="Category:"
-        app:layout_constraintBaseline_toBaselineOf="@+id/categoryInput"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/categoryInput"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toEndOf="@+id/amountInput"
-        app:layout_constraintStart_toStartOf="@+id/amountInput"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        app:layout_constraintBottom_toBottomOf="@+id/amountInput"
+        app:layout_constraintEnd_toStartOf="@+id/spinnerCategory"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/amount"
@@ -53,29 +49,13 @@
         android:id="@+id/amountInput"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="123dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/dateInput"
-        app:layout_constraintTop_toBottomOf="@+id/categoryInput" />
-
-    <Switch
-        android:id="@+id/IncomeExpense"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:checked="true"
-        android:contentDescription="Income or Expense"
-        android:text="Expense"
-        android:textOff="Income"
-        android:textOn="Expense"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateInput" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/submit_transaction_form"
@@ -109,5 +89,17 @@
         android:text="Budgeted at:"
         app:layout_constraintBaseline_toBaselineOf="@+id/dateInput"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinnerCategory"
+        android:layout_width="0dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="71dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="72dp"
+        app:layout_constraintBottom_toBottomOf="@+id/amountInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/category"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
