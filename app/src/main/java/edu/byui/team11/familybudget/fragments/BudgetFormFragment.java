@@ -14,12 +14,13 @@ import android.widget.EditText;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.byui.team11.familybudget.MainActivity;
 import edu.byui.team11.familybudget.R;
 import edu.byui.team11.familybudget.model.Budget;
 
 public class BudgetFormFragment extends Fragment {
 
-    private final List<Budget> ourBudgetsDatabase = new ArrayList<>();
+    private List<Budget> ourBudgetsDatabase = new ArrayList<>();
 
     @Nullable
     @Override
@@ -33,15 +34,18 @@ public class BudgetFormFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         //TODO
-        //loadBudgetFromTheDatabase();
+        loadBudgetFromDatabase();
         displayBudgetOnForm();
 
         configureSubmitButton((FloatingActionButton) getView().findViewById(R.id.submit_budget_button));
     }
+    private void loadBudgetFromDatabase(){
 
-    private void displayBudgetOnForm() {
-        //Next step
-        // Use this.ourBudgetsDatabase to load.
+        this.ourBudgetsDatabase = MainActivity.budgetDatabase.budgetDAO().findAll();
+    }
+
+    private void displayBudgetOnForm()
+    {
     }
 
     public void onClickSubmitButton() {
@@ -75,27 +79,27 @@ public class BudgetFormFragment extends Fragment {
         Budget incomeBudget = new Budget();
         incomeBudget.category = "income";
         incomeBudget.amount = Float.parseFloat(incomeInput.getText().toString());
-        ourBudgetsDatabase.add(incomeBudget);
+        MainActivity.budgetDatabase.budgetDAO().create(incomeBudget);
 
         Budget tithingBudget = new Budget();
         tithingBudget.category = "tithing";
         tithingBudget.amount = Float.parseFloat(tithingInput.getText().toString());
-        ourBudgetsDatabase.add(tithingBudget);
+        MainActivity.budgetDatabase.budgetDAO().create(tithingBudget);
 
         Budget utilitiesBudget = new Budget();
         utilitiesBudget.category = "utilities";
         utilitiesBudget.amount = Float.parseFloat(utilitiesInput.getText().toString());
-        ourBudgetsDatabase.add(utilitiesBudget);
+        MainActivity.budgetDatabase.budgetDAO().create(utilitiesBudget);
 
         Budget rentBudget = new Budget();
         rentBudget.category = "rent";
         rentBudget.amount = Float.parseFloat(rentInput.getText().toString());
-        ourBudgetsDatabase.add(rentBudget);
+        MainActivity.budgetDatabase.budgetDAO().create(rentBudget);
 
         Budget foodBudget = new Budget();
         foodBudget.category = "food";
         foodBudget.amount = Float.parseFloat(foodInput.getText().toString());
-        ourBudgetsDatabase.add(foodBudget);
+        MainActivity.budgetDatabase.budgetDAO().create(foodBudget);
     }
 
     private void showSuccessMessage(View view) {

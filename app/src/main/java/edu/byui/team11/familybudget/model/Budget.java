@@ -20,3 +20,5 @@ public class Budget {
     @ColumnInfo
     public float amount;
 }
+
+
