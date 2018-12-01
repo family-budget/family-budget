@@ -60,7 +60,7 @@ public class TransactionListAdapter extends RecyclerView.Adapter<TransactionList
         TextView dateView;
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
 
-        public TransactionViewHolder(View itemView) {
+        TransactionViewHolder(View itemView) {
             super(itemView);
 
             descriptionView = itemView.findViewById(R.id.description);
