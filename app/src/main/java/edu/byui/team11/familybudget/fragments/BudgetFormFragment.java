@@ -101,6 +101,12 @@ public class BudgetFormFragment extends Fragment {
         foodBudget.category = "food";
         foodBudget.amount = Float.parseFloat(foodInput.getText().toString());
         MainActivity.budgetDatabase.budgetDAO().create(foodBudget);
+
+
+        Budget otherBudget = new Budget();
+        otherBudget.category = "other";
+        otherBudget.amount = Float.parseFloat(otherInput.getText().toString());
+        MainActivity.budgetDatabase.budgetDAO().create(otherBudget);
     }
 
     private void showSuccessMessage(View view) {
