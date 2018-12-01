@@ -26,20 +26,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="77dp"
+        android:layout_marginEnd="93dp"
+        android:layout_marginBottom="73dp"
         android:text="Category:"
-        app:layout_constraintBaseline_toBaselineOf="@+id/categoryInput"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/categoryInput"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/Category"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        app:layout_constraintBottom_toBottomOf="@+id/amountInput"
+        app:layout_constraintEnd_toStartOf="@+id/categorySpinner"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/Amount"
@@ -49,34 +45,18 @@
         android:text="Amount:"
         app:layout_constraintBaseline_toBaselineOf="@+id/amountInput"
         app:layout_constraintEnd_toStartOf="@+id/amountInput"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/amountInput"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="120dp"
         android:ems="10"
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/categoryInput"
-        app:layout_constraintTop_toBottomOf="@+id/categoryInput" />
-
-    <Switch
-        android:id="@+id/IncomeExpense"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:contentDescription="Income or Expense"
-        android:text="Income or Expense"
-        android:textOff="Expense"
-        android:textOn="Income"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/amountInput" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/submit_transaction_form"
@@ -88,5 +68,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_menu_save" />
+
+    <Spinner
+        android:id="@+id/categorySpinner"
+        android:layout_width="0dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="49dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="47dp"
+        android:entries="categoryArray"
+        app:layout_constraintBottom_toBottomOf="@+id/Amount"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/Category"
+        app:layout_constraintTop_toTopOf="@+id/title" />
 
 </android.support.constraint.ConstraintLayout>

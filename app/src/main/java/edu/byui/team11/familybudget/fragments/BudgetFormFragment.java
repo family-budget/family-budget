@@ -67,6 +67,7 @@ public class BudgetFormFragment extends Fragment {
         EditText utilitiesInput = formView.findViewById(R.id.utilitiesInput);
         EditText rentInput = formView.findViewById(R.id.rentInput);
         EditText foodInput = formView.findViewById(R.id.foodInput);
+        EditText otherInput = formView.findViewById(R.id.otherInput);
 
         //TODO: Put in the database instead of a List
         //TODO: validate
@@ -96,6 +97,12 @@ public class BudgetFormFragment extends Fragment {
         foodBudget.category = "food";
         foodBudget.amount = Float.parseFloat(foodInput.getText().toString());
         ourBudgetsDatabase.add(foodBudget);
+
+        Budget otherBudget = new Budget();
+        otherBudget.category = "other";
+        otherBudget.amount = Float.parseFloat(otherInput.getText().toString());
+        ourBudgetsDatabase.add(otherBudget);
+
     }
 
     private void showSuccessMessage(View view) {

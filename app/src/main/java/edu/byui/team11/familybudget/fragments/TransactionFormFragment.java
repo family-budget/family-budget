@@ -9,12 +9,16 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 
+import java.lang.reflect.Array;
 import java.util.Calendar;
 import java.util.Objects;
 
 import edu.byui.team11.familybudget.R;
+import edu.byui.team11.familybudget.model.Budget;
 import edu.byui.team11.familybudget.model.Transaction;
 import edu.byui.team11.familybudget.viewmodel.TransactionViewModel;
 
@@ -56,13 +60,27 @@ public class TransactionFormFragment extends Fragment {
         });
     }
 
+    public void addItemsOnSpinner() {
+
+
+        String[] categoryArray = {"Income", "Tithing", "Utilities", "Rent/Mortgage", "Food", "Other"};
+        Spinner spinner = view.findViewById(R.id.categorySpinner);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<String> adapter = new ArrayAdapter.<String> (this,
+                R.array.categoryArray, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
+    }
+
     private void saveTransactions(View view) {
+
+
         // Get input fields from the view
         Transaction transaction = new Transaction();
 
-        EditText categoryInput = view.findViewById(R.id.categoryInput);
+        EditText categoryInput = view.findViewById(R.id.categorySpinner);
         EditText amountInput = view.findViewById(R.id.amountInput);
-        //Switch IncomeExpense = view.findViewById(R.id.IncomeExpense);
 
         transaction.category = categoryInput.getText().toString();
         transaction.amount = Float.parseFloat(amountInput.getText().toString());
