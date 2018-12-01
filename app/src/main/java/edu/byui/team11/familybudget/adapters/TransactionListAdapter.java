@@ -77,7 +77,7 @@ public class TransactionListAdapter extends RecyclerView.Adapter<TransactionList
         }
 
         public void setDate(Date date) {
-            dateView.setText(String.format(formatter.format(date)));
+            dateView.setText(formatter.format(date));
         }
     }
 }
