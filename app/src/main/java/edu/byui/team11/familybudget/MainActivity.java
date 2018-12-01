@@ -8,8 +8,6 @@ import edu.byui.team11.familybudget.fragments.TransactionListFragment;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TransactionListAdapter adapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,5 +24,4 @@ public class MainActivity extends AppCompatActivity {
                 .replace(R.id.container, TransactionListFragment.newInstance())
                 .commitNow();
     }
-
 }
