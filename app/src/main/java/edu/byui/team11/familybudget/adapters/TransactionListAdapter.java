@@ -8,7 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -43,6 +45,7 @@ public class TransactionListAdapter extends RecyclerView.Adapter<TransactionList
         Transaction current = this.transactions.get(position);
         holder.setDescription(current.category);
         holder.setAmount(current.amount);
+        holder.setDate(current.budgetedAt);
     }
 
     @Override
@@ -52,14 +55,17 @@ public class TransactionListAdapter extends RecyclerView.Adapter<TransactionList
     }
 
     public class TransactionViewHolder extends RecyclerView.ViewHolder {
-        public TextView descriptionView;
-        public TextView amountView;
+        TextView descriptionView;
+        TextView amountView;
+        TextView dateView;
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
 
         public TransactionViewHolder(View itemView) {
             super(itemView);
 
             descriptionView = itemView.findViewById(R.id.description);
             amountView = itemView.findViewById(R.id.amount);
+            dateView = itemView.findViewById(R.id.date);
         }
 
         public void setDescription(String description) {
@@ -68,6 +74,10 @@ public class TransactionListAdapter extends RecyclerView.Adapter<TransactionList
 
         public void setAmount(float amount) {
             amountView.setText(String.format(Locale.getDefault(), "U$ %.2f", amount));
+        }
+
+        public void setDate(Date date) {
+            dateView.setText(String.format(formatter.format(date)));
         }
     }
 }
