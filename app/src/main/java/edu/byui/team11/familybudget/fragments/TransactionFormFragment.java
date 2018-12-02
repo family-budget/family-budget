@@ -67,7 +67,8 @@ public class TransactionFormFragment extends Fragment {
         }
 
         private DatePickerDialog getDatePickerDialog() {
-            return new DatePickerDialog(this.context, getDateSetListener(), this.getYear(), this.getMonth(), this.getDay());
+            return new DatePickerDialog(this.context, getDateSetListener(),
+                    this.getYear(), this.getMonth(), this.getDay());
         }
 
         private int getDay() {
