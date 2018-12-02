@@ -1,5 +1,6 @@
 package edu.byui.team11.familybudget.dao;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
@@ -24,5 +25,5 @@ public interface BudgetDAO {
     public void delete(Budget... budgets);
 
     @Query("SELECT * FROM budgets")
-    public List<Budget> findAll();
+    public LiveData<List<Budget>> findAll();
 }
