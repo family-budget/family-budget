@@ -33,6 +33,7 @@ import edu.byui.team11.familybudget.viewmodel.TransactionViewModel;
 public class TransactionFormFragment extends Fragment {
 
     private DateDialog dateDialog;
+    private String selectedCategory = "";
 
     class DateDialog {
         private final View.OnClickListener viewListener;
@@ -110,7 +111,6 @@ public class TransactionFormFragment extends Fragment {
 
         this.viewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity()))
                 .get(TransactionViewModel.class);
-        //addItemsOnSpinner(getView());
     }
 
     @Nullable
@@ -123,8 +123,12 @@ public class TransactionFormFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         configureSubmitButton((FloatingActionButton) getView().findViewById(R.id.submit_transaction_form));
+
         this.dateDialog = new DateDialog(getContext(), (TextView) getView().findViewById(R.id.dateInput));
+
+        addItemsOnSpinner(getView());
     }
 
 
@@ -141,19 +145,26 @@ public class TransactionFormFragment extends Fragment {
     }
 
     public void addItemsOnSpinner(View view) {
-
-
-        Spinner spinner = view.findViewById(R.id.spinnerCategory);
-
-        spinner.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
-
-        List<String> categories = new ArrayList<String>();
+        final List<String> categories = new ArrayList<String>();
         categories.add("Income");
         categories.add("Tithing");
         categories.add("Utilities");
         categories.add("Rent/Mortgage");
         categories.add("Food");
         categories.add("Other");
+
+        Spinner spinner = view.findViewById(R.id.spinnerCategory);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedCategory = categories.get(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                selectedCategory = "";
+            }
+        });
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, categories);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -163,11 +174,9 @@ public class TransactionFormFragment extends Fragment {
     private void saveTransactions(View view) {
         // Get input fields from the view
         Transaction transaction = new Transaction();
-
-        EditText categoryInput = view.findViewById(R.id.spinnerCategory);
         EditText amountInput = view.findViewById(R.id.amountInput);
 
-        transaction.category = categoryInput.getText().toString();
+        transaction.category = this.selectedCategory;
         transaction.amount = Float.parseFloat(amountInput.getText().toString());
         transaction.budgetedAt = this.dateDialog.getDate();
 
