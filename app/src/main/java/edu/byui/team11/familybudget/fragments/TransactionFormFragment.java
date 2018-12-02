@@ -11,13 +11,18 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -105,6 +110,7 @@ public class TransactionFormFragment extends Fragment {
 
         this.viewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity()))
                 .get(TransactionViewModel.class);
+        //addItemsOnSpinner(getView());
     }
 
     @Nullable
@@ -132,6 +138,26 @@ public class TransactionFormFragment extends Fragment {
                         .commit();
             }
         });
+    }
+
+    public void addItemsOnSpinner(View view) {
+
+
+        Spinner spinner = view.findViewById(R.id.spinnerCategory);
+
+        spinner.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
+
+        List<String> categories = new ArrayList<String>();
+        categories.add("Income");
+        categories.add("Tithing");
+        categories.add("Utilities");
+        categories.add("Rent/Mortgage");
+        categories.add("Food");
+        categories.add("Other");
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, categories);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
     }
 
     private void saveTransactions(View view) {
