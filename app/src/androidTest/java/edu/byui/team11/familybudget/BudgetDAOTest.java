@@ -38,17 +38,17 @@ public class BudgetDAOTest {
   @Test
   public void shouldPersistBudgets() throws Exception {
     // Assert the initial state
-    assertTrue(this.budgetsDao.findAll().isEmpty());
+    assertTrue(this.budgetsDao.getAll().isEmpty());
 
     // Create a budget
     Budget budget = new Budget();
     budget.amount = 10;
 
     // Add it to the database (this is what we are testing)
-    this.budgetsDao.create(budget);
+    this.budgetsDao.save(budget);
 
     // Assert we can retrieve it from the database
-    List<Budget> created = this.budgetsDao.findAll();
+    List<Budget> created = this.budgetsDao.getAll();
     assertEquals(1, created.size());
 
     // Assert it is retrieved with the same value it was supposed to have

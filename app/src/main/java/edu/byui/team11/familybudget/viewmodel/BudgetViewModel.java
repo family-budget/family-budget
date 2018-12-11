@@ -9,10 +9,8 @@ import android.support.annotation.NonNull;
 import java.util.List;
 
 import edu.byui.team11.familybudget.dao.BudgetDAO;
-import edu.byui.team11.familybudget.dao.TransactionDAO;
 import edu.byui.team11.familybudget.database.ApplicationDatabase;
 import edu.byui.team11.familybudget.model.Budget;
-import edu.byui.team11.familybudget.model.Transaction;
 
 public class BudgetViewModel extends AndroidViewModel {
 
@@ -23,7 +21,7 @@ public class BudgetViewModel extends AndroidViewModel {
         super(application);
 
         this.repository = ApplicationDatabase.getInstance(application).budgetDAO();
-        this.budgets = repository.findAll();
+        this.budgets = repository.getAll();
     }
 
     public LiveData<List<Budget>> getAllBudgets() { return this.budgets; }
@@ -41,7 +39,7 @@ public class BudgetViewModel extends AndroidViewModel {
 
         @Override
         protected Void doInBackground(Budget... budgets) {
-            this.repository.create(budgets);
+            this.repository.save(budgets);
             return null;
         }
     }

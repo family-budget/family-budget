@@ -2,28 +2,26 @@ package edu.byui.team11.familybudget.dao;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
-import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
-import android.arch.persistence.room.Update;
-
-import java.util.List;
-
 import edu.byui.team11.familybudget.model.Budget;
+import java.util.List;
 
 @Dao
 public interface BudgetDAO {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    public void create(Budget... budgets);
+  /**
+   * Stores {@link Budget} into the database
+   * @param budgets
+   */
+  @Insert(onConflict = OnConflictStrategy.REPLACE)
+  void save(Budget... budgets);
 
-    @Update
-    public void update(Budget... budgets);
-
-    @Delete
-    public void delete(Budget... budgets);
-
-    @Query("SELECT * FROM budgets")
-    public LiveData<List<Budget>> findAll();
+  /**
+   * Retrieves all {@link Budget} from the database
+   * @return
+   */
+  @Query("SELECT * FROM budgets")
+  LiveData<List<Budget>> getAll();
 }
