@@ -32,7 +32,7 @@ public class TransactionDAOTest {
   public void createDb() {
     Context context = InstrumentationRegistry.getTargetContext();
     this.db = Room.inMemoryDatabaseBuilder(context, ApplicationDatabase.class).build();
-    this.transactionsDao = this.db.transactionDAO();
+    this.transactionsDao = this.db.getTransactionDAO();
   }
 
   @After

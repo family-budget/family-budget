@@ -4,11 +4,11 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class BudgetTest {
+public class CategoryTest {
     @Test
     public void shouldHaveAmount() {
-        Budget budget = new Budget();
-        budget.amount = 12;
-        assertEquals(12, budget.amount);
+        Category category = new Category();
+        category.budgetedAmount = 12;
+        assertEquals(12, category.budgetedAmount);
     }
 }

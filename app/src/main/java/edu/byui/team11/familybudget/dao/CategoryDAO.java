@@ -5,23 +5,26 @@ import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
-import edu.byui.team11.familybudget.model.Budget;
+import edu.byui.team11.familybudget.model.Category;
 import java.util.List;
 
+/**
+ * Data access object for the transactions table
+ */
 @Dao
-public interface BudgetDAO {
+public interface CategoryDAO {
 
   /**
-   * Stores {@link Budget} into the database
-   * @param budgets
+   * Stores {@link Category} into the database
+   * @param categories
    */
   @Insert(onConflict = OnConflictStrategy.REPLACE)
-  void save(Budget... budgets);
+  void save(Category... categories);
 
   /**
-   * Retrieves all {@link Budget} from the database
+   * Retrieves all {@link Category} from the database
    * @return
    */
-  @Query("SELECT * FROM budgets")
-  LiveData<List<Budget>> getAll();
+  @Query("SELECT * FROM categories")
+  LiveData<List<Category>> getAll();
 }

@@ -12,155 +12,153 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-
-import java.util.ArrayList;
+import edu.byui.team11.familybudget.R;
+import edu.byui.team11.familybudget.model.Category;
+import edu.byui.team11.familybudget.viewmodel.CategoryViewModel;
 import java.util.List;
 import java.util.Locale;
 
-import edu.byui.team11.familybudget.MainActivity;
-import edu.byui.team11.familybudget.R;
-import edu.byui.team11.familybudget.model.Budget;
-import edu.byui.team11.familybudget.model.Transaction;
-import edu.byui.team11.familybudget.viewmodel.BudgetViewModel;
-import edu.byui.team11.familybudget.viewmodel.TransactionViewModel;
-
+/**
+ * Fragment used to manage categories and their budgeted amounts
+ */
 public class BudgetFormFragment extends Fragment {
 
-    private List<Budget> ourBudgetsDatabase = new ArrayList<>();
+  private EditText incomeInput;
+  private EditText tithingInput;
+  private EditText utilitiesInput;
+  private EditText rentInput;
+  private EditText foodInput;
+  private EditText otherInput;
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.budget_form, container, false);
-    }
+  @Nullable
+  @Override
+  public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+      @Nullable Bundle savedInstanceState) {
+    return inflater.inflate(R.layout.budget_form, container, false);
+  }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+  @Override
+  public void onCreate(@Nullable Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+  }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+  @Override
+  public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    super.onActivityCreated(savedInstanceState);
 
-        final View formView = getView();
+    final View formView = getView();
+    incomeInput = formView.findViewById(R.id.incomeInput);
+    tithingInput = formView.findViewById(R.id.tithingInput);
+    utilitiesInput = formView.findViewById(R.id.utilitiesInput);
+    rentInput = formView.findViewById(R.id.rentInput);
+    foodInput = formView.findViewById(R.id.foodInput);
+    otherInput = formView.findViewById(R.id.otherInput);
 
-        BudgetViewModel budgetViewModel = ViewModelProviders.of(getActivity()).get(BudgetViewModel.class);
-        budgetViewModel.getAllBudgets().observe(getActivity(), new Observer<List<Budget>>() {
-            @Override
-            public void onChanged(@Nullable List<Budget> budgets) {
+    CategoryViewModel categoryViewModel = ViewModelProviders.of(getActivity())
+        .get(CategoryViewModel.class);
+    categoryViewModel.getAllCategories().observe(getActivity(), getCategoriesObserver(formView));
 
-                EditText incomeInput = formView.findViewById(R.id.incomeInput);
-                EditText tithingInput = formView.findViewById(R.id.tithingInput);
-                EditText utilitiesInput = formView.findViewById(R.id.utilitiesInput);
-                EditText rentInput = formView.findViewById(R.id.rentInput);
-                EditText foodInput = formView.findViewById(R.id.foodInput);
-                EditText otherInput = formView.findViewById(R.id.otherInput);
+    configureSubmitButton((FloatingActionButton) formView.findViewById(R.id.submit_budget_button));
+  }
 
-                for (Budget b : budgets) {
-                    if (b.category.equalsIgnoreCase("income")) {
-                        incomeInput.setText(String.format(Locale.getDefault(), "%.2f", b.amount));
-                    }
+  /**
+   * Builds a {@link Observer} to update the inputs in the form when {@link Category} are changed.
+   */
+  @NonNull
+  private Observer<List<Category>> getCategoriesObserver(final View formView) {
+    return new Observer<List<Category>>() {
+      @Override
+      public void onChanged(@Nullable List<Category> categories) {
 
-                    if (b.category.equalsIgnoreCase("tithing")) {
-                        tithingInput.setText(String.format(Locale.getDefault(), "%.2f", b.amount));
-                    }
+        for (Category b : categories) {
+          if (b.name.equalsIgnoreCase("income")) {
+            incomeInput.setText(String.format(Locale.getDefault(), "%.2f", b.budgetedAmount));
+          }
 
-                    if (b.category.equalsIgnoreCase("utilities")) {
-                        utilitiesInput.setText(String.format(Locale.getDefault(), "%.2f", b.amount));
-                    }
+          if (b.name.equalsIgnoreCase("tithing")) {
+            tithingInput.setText(String.format(Locale.getDefault(), "%.2f", b.budgetedAmount));
+          }
 
-                    if (b.category.equalsIgnoreCase("rent/mortgage")) {
-                        rentInput.setText(String.format(Locale.getDefault(), "%.2f", b.amount));
-                    }
+          if (b.name.equalsIgnoreCase("utilities")) {
+            utilitiesInput.setText(String.format(Locale.getDefault(), "%.2f", b.budgetedAmount));
+          }
 
-                    if (b.category.equalsIgnoreCase("food")) {
-                        foodInput.setText(String.format(Locale.getDefault(), "%.2f", b.amount));
-                    }
+          if (b.name.equalsIgnoreCase("rent/mortgage")) {
+            rentInput.setText(String.format(Locale.getDefault(), "%.2f", b.budgetedAmount));
+          }
 
-                    if (b.category.equalsIgnoreCase("other")) {
-                        otherInput.setText(String.format(Locale.getDefault(), "%.2f", b.amount));
-                    }
-                }
-            }
-        });
+          if (b.name.equalsIgnoreCase("food")) {
+            foodInput.setText(String.format(Locale.getDefault(), "%.2f", b.budgetedAmount));
+          }
 
-        configureSubmitButton((FloatingActionButton) getView().findViewById(R.id.submit_budget_button));
-    }
+          if (b.name.equalsIgnoreCase("other")) {
+            otherInput.setText(String.format(Locale.getDefault(), "%.2f", b.budgetedAmount));
+          }
+        }
+      }
+    };
+  }
 
-    public void onClickSubmitButton() {
-        View formView = getView();
-        saveBudget(formView);
-        showSuccessMessage(formView);
-        goToTransactionList();
-    }
+  private void configureSubmitButton(FloatingActionButton bt) {
+    final View formView = getView();
 
-    private void configureSubmitButton(FloatingActionButton bt) {
-        bt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View button) {
-                onClickSubmitButton();
-            }
-        });
-    }
+    bt.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View button) {
+        saveBudget();
 
-    private void saveBudget(View formView) {
-        // Get input fields from the view
-        EditText incomeInput = formView.findViewById(R.id.incomeInput);
-        EditText tithingInput = formView.findViewById(R.id.tithingInput);
-        EditText utilitiesInput = formView.findViewById(R.id.utilitiesInput);
-        EditText rentInput = formView.findViewById(R.id.rentInput);
-        EditText foodInput = formView.findViewById(R.id.foodInput);
-        EditText otherInput = formView.findViewById(R.id.otherInput);
+        Snackbar.make(formView, "Category saved", Snackbar.LENGTH_LONG)
+            .setAction("Action", null).show();
 
-        //TODO: validate
-
-        // Create budget objects and add them to the "list"
-        Budget incomeBudget = new Budget();
-        incomeBudget.category = "income";
-        incomeBudget.amount = Float.parseFloat(incomeInput.getText().toString());
-
-        Budget tithingBudget = new Budget();
-        tithingBudget.category = "tithing";
-        tithingBudget.amount = Float.parseFloat(tithingInput.getText().toString());
-
-        Budget utilitiesBudget = new Budget();
-        utilitiesBudget.category = "utilities";
-        utilitiesBudget.amount = Float.parseFloat(utilitiesInput.getText().toString());
-
-        Budget rentBudget = new Budget();
-        rentBudget.category = "rent/mortgage";
-        rentBudget.amount = Float.parseFloat(rentInput.getText().toString());
-
-        Budget foodBudget = new Budget();
-        foodBudget.category = "food";
-        foodBudget.amount = Float.parseFloat(foodInput.getText().toString());
-
-        Budget otherBudget = new Budget();
-        otherBudget.category = "other";
-        otherBudget.amount = Float.parseFloat(otherInput.getText().toString());
-
-        BudgetViewModel budgetViewModel = ViewModelProviders.of(getActivity()).get(BudgetViewModel.class);
-        budgetViewModel.insert(
-                incomeBudget,
-                tithingBudget,
-                utilitiesBudget,
-                rentBudget,
-                foodBudget,
-                otherBudget
-        );
-    }
-
-    private void showSuccessMessage(View view) {
-        Snackbar.make(view, "Budget saved", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show();
-    }
-
-    private void goToTransactionList() {
         getFragmentManager().beginTransaction()
-                .replace(R.id.container, TransactionListFragment.newInstance())
-                .commit();
-    }
+            .replace(R.id.container, TransactionListFragment.newInstance())
+            .commit();
+      }
+    });
+  }
+
+  /**
+   * Get user input and stores the categories on the database
+   */
+  private void saveBudget() {
+    //TODO: validate
+
+    // Create budget objects and add them to the "list"
+    Category incomeCategory = new Category();
+    incomeCategory.name = "income";
+    incomeCategory.budgetedAmount = Float.parseFloat(incomeInput.getText().toString());
+
+    Category tithingCategory = new Category();
+    tithingCategory.name = "tithing";
+    tithingCategory.budgetedAmount = Float.parseFloat(tithingInput.getText().toString());
+
+    Category utilitiesCategory = new Category();
+    utilitiesCategory.name = "utilities";
+    utilitiesCategory.budgetedAmount = Float.parseFloat(utilitiesInput.getText().toString());
+
+    Category rentCategory = new Category();
+    rentCategory.name = "rent/mortgage";
+    rentCategory.budgetedAmount = Float.parseFloat(rentInput.getText().toString());
+
+    Category foodCategory = new Category();
+    foodCategory.name = "food";
+    foodCategory.budgetedAmount = Float.parseFloat(foodInput.getText().toString());
+
+    Category otherCategory = new Category();
+    otherCategory.name = "other";
+    otherCategory.budgetedAmount = Float.parseFloat(otherInput.getText().toString());
+
+    CategoryViewModel categoryViewModel = ViewModelProviders.of(getActivity())
+        .get(CategoryViewModel.class);
+
+    categoryViewModel.insert(
+        incomeCategory,
+        tithingCategory,
+        utilitiesCategory,
+        rentCategory,
+        foodCategory,
+        otherCategory
+    );
+  }
 
 }

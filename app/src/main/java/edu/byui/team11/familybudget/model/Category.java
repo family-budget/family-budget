@@ -7,18 +7,18 @@ import android.support.annotation.NonNull;
 
 
 /**
- * Budget represents the budgeted amount for each category.
+ * Category represents budgeted amounts for a "label".
  **/
 
-@Entity(tableName = "budgets")
-public class Budget {
+@Entity(tableName = "categories")
+public class Category {
 
   @PrimaryKey
   @NonNull
-  public String category;
+  public String name;
 
   @ColumnInfo
-  public float amount;
+  public float budgetedAmount;
 }
 
 

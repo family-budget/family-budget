@@ -115,7 +115,7 @@ public class TransactionListAdapter extends
     }
 
     /**
-     * Sets the amount on the View
+     * Sets the budgetedAmount on the View
      */
     public void setAmount(float amount) {
       //TODO: Should show everything but incomes as a negative value

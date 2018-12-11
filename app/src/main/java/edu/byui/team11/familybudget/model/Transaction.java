@@ -10,8 +10,8 @@ import java.util.Date;
 
 
 /**
- * Transaction represents the transactions that will affect our budgeted amount depending on the
- * amount for the transaction.
+ * Transaction represents the transactions that will affect our budgeted budgetedAmount depending on the
+ * budgetedAmount for the transaction.
  */
 @Entity(tableName = "transactions")
 public class Transaction {

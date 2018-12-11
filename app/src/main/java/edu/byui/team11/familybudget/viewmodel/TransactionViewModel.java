@@ -20,7 +20,7 @@ public class TransactionViewModel extends AndroidViewModel {
     public TransactionViewModel(@NonNull Application application) {
         super(application);
 
-        this.repository = ApplicationDatabase.getInstance(application).transactionDAO();
+        this.repository = ApplicationDatabase.getInstance(application).getTransactionDAO();
         this.transactions = repository.getAllTransactions();
     }
 

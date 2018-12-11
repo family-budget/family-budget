@@ -4,32 +4,38 @@ import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
-
-import edu.byui.team11.familybudget.dao.BudgetDAO;
+import edu.byui.team11.familybudget.dao.CategoryDAO;
 import edu.byui.team11.familybudget.dao.TransactionDAO;
-import edu.byui.team11.familybudget.model.Budget;
+import edu.byui.team11.familybudget.model.Category;
 import edu.byui.team11.familybudget.model.Transaction;
 
-@Database(entities = {Budget.class, Transaction.class}, version = 2, exportSchema = false)
+@Database(entities = {Category.class, Transaction.class}, version = 3, exportSchema = false)
 public abstract class ApplicationDatabase extends RoomDatabase {
-    public abstract BudgetDAO budgetDAO();
 
-    public abstract TransactionDAO transactionDAO();
+  public abstract CategoryDAO getCategoryDAO();
+  public abstract TransactionDAO getTransactionDAO();
 
-    private static volatile ApplicationDatabase INSTANCE;
+  private static volatile ApplicationDatabase INSTANCE;
 
-    public static ApplicationDatabase getInstance(final Context context) {
-        if (INSTANCE != null) {
-            return INSTANCE;
-        }
-
-        synchronized (ApplicationDatabase.class) {
-            if (INSTANCE == null) {
-                INSTANCE = Room.databaseBuilder(context.getApplicationContext(), ApplicationDatabase.class, "family-budget")
-                        .fallbackToDestructiveMigration()
-                        .build();
-            }
-        }
-        return INSTANCE;
+  /**
+   * Get the singleton instance for the {@link ApplicationDatabase} class.
+   * @param context
+   * @return
+   */
+  public static ApplicationDatabase getInstance(final Context context) {
+    if (INSTANCE != null) {
+      return INSTANCE;
     }
+
+    synchronized (ApplicationDatabase.class) {
+      if (INSTANCE == null) {
+        INSTANCE = Room.databaseBuilder(context.getApplicationContext(), ApplicationDatabase.class,
+            "family-budget")
+            .fallbackToDestructiveMigration()
+            .build();
+      }
+    }
+
+    return INSTANCE;
+  }
 }
