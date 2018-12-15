@@ -97,6 +97,8 @@ public class TransactionFormFragment extends Fragment {
   }
 
   private void saveTransactions(View view) {
+    //TODO: validate if input is valid
+
     // Get input fields from the view
     Transaction transaction = new Transaction();
     EditText amountInput = view.findViewById(R.id.amountInput);
