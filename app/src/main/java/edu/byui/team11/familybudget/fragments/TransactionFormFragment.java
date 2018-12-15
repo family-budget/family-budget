@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import edu.byui.team11.familybudget.R;
+import edu.byui.team11.familybudget.model.Category;
 import edu.byui.team11.familybudget.model.Transaction;
 import edu.byui.team11.familybudget.viewmodel.TransactionViewModel;
 import java.util.ArrayList;
@@ -108,5 +109,35 @@ public class TransactionFormFragment extends Fragment {
     transaction.budgetedAt = this.dateDialog.getDate();
 
     this.viewModel.insert(transaction);
+  }
+
+  private void calculateTransactions(Transaction transaction, Category incomeCategory,
+                                     Category tithingCategory, Category utilitiesCategory,
+                                     Category rentCategory, Category foodCategory,
+                                     Category otherCategory) {
+
+
+
+      if (transaction.category == "Income") {
+        incomeCategory.budgetedAmount += transaction.amount;
+      }
+      if (transaction.category == "Tithing") {
+        tithingCategory.budgetedAmount -= transaction.amount;
+      }
+      if (transaction.category == "Utilities") {
+        utilitiesCategory.budgetedAmount -= transaction.amount;
+      }
+      if (transaction.category == "Rent/Mortgage") {
+        rentCategory.budgetedAmount -= transaction.amount;
+      }
+      if (transaction.category == "Food") {
+        foodCategory.budgetedAmount -= transaction.amount;
+      } else {
+        otherCategory.budgetedAmount -= transaction.amount;
+      }
+
+
+
+
   }
 }
