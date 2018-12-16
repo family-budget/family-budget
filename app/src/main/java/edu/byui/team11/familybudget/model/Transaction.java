@@ -3,6 +3,7 @@ package edu.byui.team11.familybudget.model;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 import android.arch.persistence.room.TypeConverters;
 import edu.byui.team11.familybudget.converter.DateConverter;
@@ -13,7 +14,7 @@ import java.util.Date;
  * Transaction represents the transactions that will affect our budgeted budgetedAmount depending on the
  * budgetedAmount for the transaction.
  */
-@Entity(tableName = "transactions")
+@Entity(tableName = "transactions", indices = {@Index("category"), @Index("budgetedAt")})
 public class Transaction {
 
   @PrimaryKey(autoGenerate = true)

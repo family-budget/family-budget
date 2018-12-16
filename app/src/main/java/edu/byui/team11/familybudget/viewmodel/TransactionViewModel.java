@@ -35,7 +35,7 @@ public class TransactionViewModel extends AndroidViewModel {
     private static class insertAsyncTask extends AsyncTask<Transaction, Void, Void> {
         private final TransactionDAO repository;
 
-        public insertAsyncTask(TransactionDAO repository) {
+        insertAsyncTask(TransactionDAO repository) {
             this.repository = repository;
         }
 

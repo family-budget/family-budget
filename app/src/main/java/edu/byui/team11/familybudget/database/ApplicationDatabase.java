@@ -4,16 +4,18 @@ import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
+import edu.byui.team11.familybudget.dao.BudgetDAO;
 import edu.byui.team11.familybudget.dao.CategoryDAO;
 import edu.byui.team11.familybudget.dao.TransactionDAO;
 import edu.byui.team11.familybudget.model.Category;
 import edu.byui.team11.familybudget.model.Transaction;
 
-@Database(entities = {Category.class, Transaction.class}, version = 3, exportSchema = false)
+@Database(entities = {Category.class, Transaction.class}, version = 4, exportSchema = false)
 public abstract class ApplicationDatabase extends RoomDatabase {
 
   public abstract CategoryDAO getCategoryDAO();
   public abstract TransactionDAO getTransactionDAO();
+  public abstract BudgetDAO getBudgetDAO();
 
   private static volatile ApplicationDatabase INSTANCE;
 

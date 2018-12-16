@@ -31,5 +31,4 @@ public interface TransactionDAO {
 
     @Query("SELECT * from transactions ORDER BY budgetedAt ASC")
     LiveData<List<Transaction>> getAllTransactions();
-
 }
