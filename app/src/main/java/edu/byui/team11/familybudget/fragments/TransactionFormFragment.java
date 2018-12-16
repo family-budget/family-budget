@@ -97,14 +97,17 @@ public class TransactionFormFragment extends Fragment {
   }
 
   private void saveTransactions(View view) {
-    //TODO: validate if input is valid
-
     // Get input fields from the view
     Transaction transaction = new Transaction();
     EditText amountInput = view.findViewById(R.id.amountInput);
+    Float amount = 0f;
+
+    if (!amountInput.getText().toString().isEmpty()) {
+      amount = Float.parseFloat(amountInput.getText().toString());
+    }
 
     transaction.category = this.selectedCategory;
-    transaction.amount = Float.parseFloat(amountInput.getText().toString());
+    transaction.amount = amount;
     transaction.budgetedAt = this.dateDialog.getDate();
 
     this.viewModel.insert(transaction);
