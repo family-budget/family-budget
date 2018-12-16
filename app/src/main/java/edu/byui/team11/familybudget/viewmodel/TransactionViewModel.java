@@ -10,7 +10,7 @@ import java.util.List;
 
 import edu.byui.team11.familybudget.dao.TransactionDAO;
 import edu.byui.team11.familybudget.database.ApplicationDatabase;
-import edu.byui.team11.familybudget.model.Transaction;
+import edu.byui.team11.familybudget.entities.Transaction;
 
 public class TransactionViewModel extends AndroidViewModel {
 

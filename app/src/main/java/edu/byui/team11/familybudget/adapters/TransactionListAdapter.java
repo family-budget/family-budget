@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Locale;
 
 import edu.byui.team11.familybudget.R;
-import edu.byui.team11.familybudget.model.Transaction;
+import edu.byui.team11.familybudget.entities.Transaction;
 
 /**
  * TransactionListAdapter adapts {@link Transaction} objects into {@link TransactionViewHolder}

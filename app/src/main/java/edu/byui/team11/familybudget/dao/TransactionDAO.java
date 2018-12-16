@@ -9,7 +9,7 @@ import android.arch.persistence.room.Update;
 
 import java.util.List;
 
-import edu.byui.team11.familybudget.model.Transaction;
+import edu.byui.team11.familybudget.entities.Transaction;
 
 
 /** This contains the Transaction DAO interface and its methods **/

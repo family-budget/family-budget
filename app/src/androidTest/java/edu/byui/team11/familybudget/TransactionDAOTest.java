@@ -9,7 +9,7 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 import edu.byui.team11.familybudget.dao.TransactionDAO;
 import edu.byui.team11.familybudget.database.ApplicationDatabase;
-import edu.byui.team11.familybudget.model.Transaction;
+import edu.byui.team11.familybudget.entities.Transaction;
 import java.io.IOException;
 import java.util.List;
 import org.junit.After;

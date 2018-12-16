@@ -7,7 +7,7 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import edu.byui.team11.familybudget.dao.CategoryDAO;
 import edu.byui.team11.familybudget.database.ApplicationDatabase;
-import edu.byui.team11.familybudget.model.Category;
+import edu.byui.team11.familybudget.entities.Category;
 import java.util.List;
 
 /**

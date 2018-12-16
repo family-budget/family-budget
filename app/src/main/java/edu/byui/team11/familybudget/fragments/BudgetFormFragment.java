@@ -10,10 +10,11 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import edu.byui.team11.familybudget.R;
-import edu.byui.team11.familybudget.model.Category;
+import edu.byui.team11.familybudget.entities.Category;
 import edu.byui.team11.familybudget.viewmodel.CategoryViewModel;
 import java.util.List;
 import java.util.Locale;
@@ -29,6 +30,7 @@ public class BudgetFormFragment extends Fragment {
   private EditText rentInput;
   private EditText foodInput;
   private EditText otherInput;
+  private EditText balanceInput;
 
   @Nullable
   @Override
@@ -53,6 +55,10 @@ public class BudgetFormFragment extends Fragment {
     rentInput = formView.findViewById(R.id.rentInput);
     foodInput = formView.findViewById(R.id.foodInput);
     otherInput = formView.findViewById(R.id.otherInput);
+    balanceInput = formView.findViewById(R.id.balanceInput);
+    balanceInput.setFocusable(false);
+
+    updateBalanceWhenSomethingElseChanges();
 
     CategoryViewModel categoryViewModel = ViewModelProviders.of(getActivity())
         .get(CategoryViewModel.class);
@@ -61,11 +67,68 @@ public class BudgetFormFragment extends Fragment {
     configureSubmitButton((FloatingActionButton) formView.findViewById(R.id.submit_budget_button));
   }
 
+  private void updateBalanceWhenSomethingElseChanges() {
+    OnFocusChangeListener listener = new OnFocusChangeListener() {
+      @Override
+      public void onFocusChange(View v, boolean hasFocus) {
+        if (hasFocus) {
+          return;
+        }
+
+        balanceInput.setText(calculateBalance());
+      }
+    };
+
+    incomeInput.setOnFocusChangeListener(listener);
+    tithingInput.setOnFocusChangeListener(listener);
+    utilitiesInput.setOnFocusChangeListener(listener);
+    rentInput.setOnFocusChangeListener(listener);
+    foodInput.setOnFocusChangeListener(listener);
+    otherInput.setOnFocusChangeListener(listener);
+  }
+
+  private String calculateBalance() {
+    Float income = 0f;
+    Float tithing = 0f;
+    Float utilities = 0f;
+    Float rent = 0f;
+    Float food = 0f;
+    Float other = 0f;
+
+    if (!incomeInput.getText().toString().isEmpty()) {
+      income = Float.parseFloat(incomeInput.getText().toString());
+    }
+
+    if (!tithingInput.getText().toString().isEmpty()) {
+      tithing = Float.parseFloat(tithingInput.getText().toString());
+    }
+
+    if (!utilitiesInput.getText().toString().isEmpty()) {
+      utilities = Float.parseFloat(utilitiesInput.getText().toString());
+    }
+
+    if (!rentInput.getText().toString().isEmpty()) {
+      rent = Float.parseFloat(rentInput.getText().toString());
+    }
+
+    if (!foodInput.getText().toString().isEmpty()) {
+      food = Float.parseFloat(foodInput.getText().toString());
+    }
+
+    if (!otherInput.getText().toString().isEmpty()) {
+      other = Float.parseFloat(otherInput.getText().toString());
+    }
+
+    Float balance = income - tithing - utilities - rent - food - other;
+    return String.format(Locale.getDefault(), "%.2f", balance);
+  }
+
   /**
    * Builds a {@link Observer} to update the inputs in the form when {@link Category} are changed.
    */
   @NonNull
   private Observer<List<Category>> getCategoriesObserver(final View formView) {
+
     return new Observer<List<Category>>() {
       @Override
       public void onChanged(@Nullable List<Category> categories) {
@@ -95,6 +158,8 @@ public class BudgetFormFragment extends Fragment {
             otherInput.setText(String.format(Locale.getDefault(), "%.2f", b.budgetedAmount));
           }
         }
+
+        balanceInput.setText(calculateBalance());
       }
     };
   }
@@ -121,32 +186,61 @@ public class BudgetFormFragment extends Fragment {
    * Get user input and stores the categories on the database
    */
   private void saveBudget() {
-    //TODO: validate
+    Float income = 0f;
+    Float tithing = 0f;
+    Float utilities = 0f;
+    Float rent = 0f;
+    Float food = 0f;
+    Float other = 0f;
+
+    if (!incomeInput.getText().toString().isEmpty()) {
+      income = Float.parseFloat(incomeInput.getText().toString());
+    }
+
+    if (!tithingInput.getText().toString().isEmpty()) {
+      tithing = Float.parseFloat(tithingInput.getText().toString());
+    }
+
+    if (!utilitiesInput.getText().toString().isEmpty()) {
+      utilities = Float.parseFloat(utilitiesInput.getText().toString());
+    }
+
+    if (!rentInput.getText().toString().isEmpty()) {
+      rent = Float.parseFloat(rentInput.getText().toString());
+    }
+
+    if (!foodInput.getText().toString().isEmpty()) {
+      food = Float.parseFloat(foodInput.getText().toString());
+    }
+
+    if (!otherInput.getText().toString().isEmpty()) {
+      other = Float.parseFloat(otherInput.getText().toString());
+    }
 
     // Create budget objects and add them to the "list"
     Category incomeCategory = new Category();
     incomeCategory.name = "income";
-    incomeCategory.budgetedAmount = Float.parseFloat(incomeInput.getText().toString());
+    incomeCategory.budgetedAmount = income;
 
     Category tithingCategory = new Category();
     tithingCategory.name = "tithing";
-    tithingCategory.budgetedAmount = Float.parseFloat(tithingInput.getText().toString());
+    tithingCategory.budgetedAmount = tithing;
 
     Category utilitiesCategory = new Category();
     utilitiesCategory.name = "utilities";
-    utilitiesCategory.budgetedAmount = Float.parseFloat(utilitiesInput.getText().toString());
+    utilitiesCategory.budgetedAmount = utilities;
 
     Category rentCategory = new Category();
     rentCategory.name = "rent/mortgage";
-    rentCategory.budgetedAmount = Float.parseFloat(rentInput.getText().toString());
+    rentCategory.budgetedAmount = rent;
 
     Category foodCategory = new Category();
     foodCategory.name = "food";
-    foodCategory.budgetedAmount = Float.parseFloat(foodInput.getText().toString());
+    foodCategory.budgetedAmount = food;
 
     Category otherCategory = new Category();
     otherCategory.name = "other";
-    otherCategory.budgetedAmount = Float.parseFloat(otherInput.getText().toString());
+    otherCategory.budgetedAmount = other;
 
     CategoryViewModel categoryViewModel = ViewModelProviders.of(getActivity())
         .get(CategoryViewModel.class);

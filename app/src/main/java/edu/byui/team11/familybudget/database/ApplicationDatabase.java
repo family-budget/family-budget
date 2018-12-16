@@ -7,8 +7,8 @@ import android.content.Context;
 import edu.byui.team11.familybudget.dao.BudgetDAO;
 import edu.byui.team11.familybudget.dao.CategoryDAO;
 import edu.byui.team11.familybudget.dao.TransactionDAO;
-import edu.byui.team11.familybudget.model.Category;
-import edu.byui.team11.familybudget.model.Transaction;
+import edu.byui.team11.familybudget.entities.Category;
+import edu.byui.team11.familybudget.entities.Transaction;
 
 @Database(entities = {Category.class, Transaction.class}, version = 4, exportSchema = false)
 public abstract class ApplicationDatabase extends RoomDatabase {

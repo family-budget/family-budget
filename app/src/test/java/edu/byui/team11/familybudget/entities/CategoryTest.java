@@ -1,4 +1,4 @@
-package edu.byui.team11.familybudget.model;
+package edu.byui.team11.familybudget.entities;
 
 import org.junit.Test;
 

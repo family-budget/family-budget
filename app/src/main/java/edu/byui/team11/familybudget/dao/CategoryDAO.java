@@ -5,7 +5,7 @@ import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
-import edu.byui.team11.familybudget.model.Category;
+import edu.byui.team11.familybudget.entities.Category;
 import java.util.List;
 
 /**
